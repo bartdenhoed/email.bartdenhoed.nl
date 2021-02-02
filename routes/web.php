@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +21,13 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('/email', function () {
+    return view('email');
+})->middleware(['auth'])->name('email');
+
+Route::post('/email', [EmailController::class, 'send'])
+    ->middleware('auth')
+    ->name('email.send');
 
 require __DIR__.'/auth.php';
